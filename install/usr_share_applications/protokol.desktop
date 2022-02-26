@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Protokol
+GenericName=MIDI/OSC/Gamepad input viewer
+Comment=Protokol is a development tool to see information about MIDI/OSC/Gamepad input streams
+Exec=/opt/protokol/Protokol
+Terminal=false
+Icon=protokol
+Categories=Development

@@ -1,0 +1,118 @@
+body{
+	background:#000;
+	color:#fff;
+	font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+	font-size:14px
+}
+h1{ color:#b5babe;
+	text-align:center;
+	margin-bottom:0;
+	margin-top:10px;
+	font-size:30px}
+h1 a{color:#b5babe;
+	text-decoration:none
+}
+h3{margin:0}
+.root-container{
+	text-align:center;
+}
+ul{
+	list-style-type:none;
+	margin:0;
+	padding:0
+}
+
+.container-wrapper {
+  margin: 15px;
+  width: 60%;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  padding-top:5px
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.left-column {
+  height: 100%;
+}
+
+.right-column {
+  height: 100%;
+}
+
+.device-list-box {
+	background:#484848;
+	border:2px solid #c3c3c3;
+	height: 100%;
+	margin:0 5px 0 5px;
+}
+.device-list {
+	text-align:left;
+	color:#b5babe;
+	padding:10px;
+	margin:0 5px 0 5px;
+}
+.device-list a{color:#3cb371;
+	text-decoration:none
+}
+
+.container{
+	display:inline-block;
+	width:270px;
+	text-align:center
+}
+.linky {
+	cursor: pointer;
+	color:#3cb371;
+	}
+.hiddenvalue{
+	display:none
+}
+.device-port{padding:15px 0px 0px 10px; font-weight: bold}
+.device-ports{padding:0px 0px 0px 25px}
+.device-port.active{color:#5ccf7a}
+.buttons{margin-top:5px}
+.buttons,button{
+	display:inline-block
+}
+button{
+	position:relative;
+	background:#5ccf7a;
+	border:none;
+	border-radius:0;
+	margin:5px;
+	padding:15px 15px;
+	font-size:20px;
+	color:#fff;
+	margin-right:20px;
+	margin-left:20px
+}
+button.red{background:#e65368}
+.refresh{
+	position:absolute;
+	right:10px;
+	top:0;
+	color:#484848;
+	font-size:40px;
+	font-weight:700
+}
+.selectedItem{
+	display:inline-block
+	text-align:center;
+	background:#FFFFFF;
+	border:1px solid #c3c3c3;
+	color:#000;
+	height: 20px;
+	margin:5px 5px 0
+}
