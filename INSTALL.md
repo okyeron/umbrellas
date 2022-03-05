@@ -52,15 +52,19 @@ https://www.stderr.nl/Blog/Hardware/RaspberryPi/PowerButton.html#comments
 sudo apt install php php-fpm
 ```
 
-### nginx (or lighttpd?)
+### nginx (webserver)
 ```
 sudo apt install nginx
 
 sudo adduser pi www-data
 sudo adduser www-data audio
 ```
-edit `/etc/nginx/sites-available/default`  
-uncomment php stuff and change default directory  
+### copy nginx config
+
+```
+sudo cp --remove-destination /home/pi/umbrellas/install/webserver/default  /etc/nginx/sites-available/default
+```
+
 
 ### ttymidi  
 ```
