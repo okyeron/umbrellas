@@ -93,7 +93,18 @@ sudo dpkg -i build/amidiminder.deb
 ```
 remove default setup from `/etc/amidiminder.rules`  
 
+
+### Flash firmware (UF2 file) to QTPy  
+
+First find the firmware UF2 file in the /umbrellas_host_firmware directory.  
+
+To load the firmware, connect the QTPy to your computer and then double click the reset button on the QTPy to drop it into bootloader mode. 
+This should now show you a QTPY_BOOT drive on your computer desktop. Drag the UF2 file to QTPY_BOOT and it should dismount/reboot and come back as the *umbrellas_host*.  
+
 ---
+
+
+
 
 # OPTIONAL
 
