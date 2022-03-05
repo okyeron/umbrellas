@@ -2,6 +2,20 @@
 
 ### raspi-config
 
+### installs  
+
+```
+sudo apt update
+sudo apt-get update
+sudo apt-get install -y git bc g++ make i2c-tools libudev-dev libevdev-dev liblo-dev libavahi-compat-libdnssd-dev libasound2-dev libncurses5-dev
+sudo apt install rpi-eeprom
+```
+
+```
+git clone https://github.com/okyeron/umbrellas.git
+cd umbrellas
+```
+
 ### copy systemd units  
 
 ```
@@ -15,14 +29,13 @@ sudo systemctl enable ttymidi3.service
 sudo systemctl enable ttymidi4.service 
 ```
 
-### installs  
+### copy boot configs  
 
 ```
-sudo apt update
-sudo apt-get update
-sudo apt-get install -y git bc g++ make i2c-tools libudev-dev libevdev-dev liblo-dev libavahi-compat-libdnssd-dev libasound2-dev libncurses5-dev
-sudo apt install rpi-eeprom
+sudo cp --remove-destination /home/pi/umbrellas/install/boot/config.txt  /boot/config.txt
+sudo cp --remove-destination /home/pi/umbrellas/install/boot/cmdline.txt  /boot/cmdline.txt
 ```
+
 
 ### Not available on bullseye
 	#patchage
