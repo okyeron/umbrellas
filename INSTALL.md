@@ -93,7 +93,11 @@ sudo dpkg -i build/amidiminder.deb
 ```
 remove default setup from `/etc/amidiminder.rules`  
 
-### protokol -- OPTIONAL
+---
+
+# OPTIONAL
+
+### protokol 
 ```
 wget https://hexler.net/pub/protokol/protokol-0.4.2.84-linux-armhf.deb
 sudo apt-get install ./protokol-0.4.2.84-linux-armhf.deb
@@ -117,12 +121,11 @@ make
 ### desktop icons
 /usr/share/applications
 
-### move udev rules  
-sudo cp install/99-com.rules /etc/udev/rules.d/99-com.rules
-
 ### paths  
 /etc/systemd/system
 /var/www/html
+
+-----------------------------
 
 
 # UMBRELLAS WORK LIST
