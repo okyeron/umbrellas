@@ -64,7 +64,17 @@ sudo adduser www-data audio
 ```
 sudo cp --remove-destination /home/pi/umbrellas/install/webserver/default  /etc/nginx/sites-available/default
 ```
+### copy web files
 
+```
+cp -r /home/pi/umbrellas/install/html/umbrellas  /var/www/html/umbrellas
+sudo chown -R www-data:www-data /var/www/html/umbrellas
+```
+
+### copy udev rules  
+```
+sudo cp --remove-destination /home/pi/umbrellas/install/99-com.rules  /etc/udev/rules.d/99-com.rules 
+```
 
 ### ttymidi  
 ```
