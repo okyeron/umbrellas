@@ -1,32 +1,38 @@
 <?php
+print_r($_REQUEST);
 
-$target = $_GET['target'];
-$source = $_GET['source'];
+$target = $_POST['target'];
+$source = $_POST['source'];
+$action = $_POST['action'];
 
-// echo $target . "--" . $source;
 
-if ($_GET['action'] == "disconnect"){
+switch($action) {
+case "disconnect":
 	$ports = $source .  " -- " . $target;
 
- 	exec('aconnect -d ' . $source . " " . $target, $output, $retval);
- 	
-		if (!$retval){
-			echo "Disconnected: " . $ports;
-		} else {
-// 			print_r($output);
-			echo "Disconnect Error";
-		}
-}
-if ($_GET['action'] == "connect"){
+	exec('aconnect -d ' . $source . " " . $target, $output, $retval);
+
+	if (!$retval){
+		echo "Disconnected: " . $ports;
+	} else {
+		// 			print_r($output);
+		echo "Disconnect Error";
+	}
+	break;
+case "connect":
 	$ports = $source .  "--> " . $target;
 
- 	exec('aconnect ' . $source . " " . $target, $output, $retval);
- 	
+	exec('aconnect ' . $source . " " . $target, $output, $retval);
+
 	if (!$retval){
 		echo "Connected: " . $ports;
 	} else {
-// 		print_r($output);
+		// 		print_r($output);
 		echo "Connect Error";
 	}
+	break;
+
+default:
+	echo "I dunno";
 }
 ?>
