@@ -21,6 +21,7 @@ sudo systemctl enable ttymidi2.service
 sudo systemctl enable ttymidi3.service 
 sudo systemctl enable ttymidi4.service 
 
+sudo sed -i s/console=serial0,115200// /boot/cmdline.txt
 sudo cp --remove-destination /home/pi/umbrellas/install/boot/config.txt  /boot/config.txt
 sudo cp --remove-destination /home/pi/umbrellas/install/webserver/default  /etc/nginx/sites-available/default
 sudo cp -r /home/pi/umbrellas/install/html/umbrellas  /var/www/html/umbrellas
