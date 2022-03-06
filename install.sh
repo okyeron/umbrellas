@@ -3,14 +3,14 @@
 sudo apt update
 sudo apt-get update
 sudo apt-get install -y git bc g++ make i2c-tools libudev-dev libevdev-dev liblo-dev libavahi-compat-libdnssd-dev libasound2-dev libncurses5-dev
-sudo apt install rpi-eeprom
-sudo apt install php php-fpm
-sudo apt install nginx
+sudo apt install -y rpi-eeprom
+sudo apt install -y php php-fpm nginx
 
 sudo adduser pi www-data
 sudo adduser www-data audio
 
-cd ~/umbrellas
+git clone https://github.com/okyeron/umbrellas.git
+cd umbrellas
 
 sudo chmod 644 install/systemd/*
 sudo cp install/systemd/* /etc/systemd/system
