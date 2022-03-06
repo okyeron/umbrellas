@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+sudo raspi-config nonint do_hostname "umbrellas"
+
 sudo apt update
 sudo apt-get update
 sudo apt-get install -y git bc g++ make i2c-tools libudev-dev libevdev-dev liblo-dev libavahi-compat-libdnssd-dev libasound2-dev libncurses5-dev
