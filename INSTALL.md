@@ -41,8 +41,13 @@ sudo systemctl enable ttymidi4.service
 
 ```
 sudo cp --remove-destination /home/pi/umbrellas/install/boot/config.txt  /boot/config.txt
-sudo cp --remove-destination /home/pi/umbrellas/install/boot/cmdline.txt  /boot/cmdline.txt
 ```
+
+### remove serial from cmdline.txt
+
+`sudo nano /boot/cmdline.txt`
+
+remove `console=serial0,115200 `  
 
 
 ### Not available on bullseye
