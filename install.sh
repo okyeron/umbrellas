@@ -10,8 +10,7 @@ sudo apt install nginx
 sudo adduser pi www-data
 sudo adduser www-data audio
 
-git clone https://github.com/okyeron/umbrellas.git
-cd umbrellas
+cd ~/umbrellas
 
 sudo chmod 644 install/systemd/*
 sudo cp install/systemd/* /etc/systemd/system
