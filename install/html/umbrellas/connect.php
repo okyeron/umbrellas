@@ -1,6 +1,4 @@
 <?php
-print_r($_REQUEST);
-
 $target = $_POST['target'];
 $source = $_POST['source'];
 $action = $_POST['action'];

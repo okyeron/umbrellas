@@ -33,5 +33,10 @@
 </head>
 <body>
 	<div id="list"></div>
+<center>
+	<div>
+		<h3 id="outputtext"></h3>
+	</div>
+</center>
 </body>
 </html>

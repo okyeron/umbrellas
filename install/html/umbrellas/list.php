@@ -84,8 +84,17 @@ function parseDevices(&$devicedata){
 
 $allDeviceArray = parseDevices($alldevices);
 asort($allDeviceArray);
-// print_r($allDeviceArray);
 
+foreach($allDeviceArray as $client) {
+	//echo $client["clientId"] . " = " . $client["clientName"] . "\n";
+	foreach($client["ports"] as $port) {
+		//echo $port[1] . ":" . $port[0] . "\n";
+	}
+	$client_map[$client["clientName"]] = $client;
+}
+
+ksort($client_map);
+	
 // $inputDeviceArray = parseDevices($inputdevices);
 // asort($inputDeviceArray);
 // // 
@@ -120,7 +129,7 @@ echo "</pre>";
 					<div>
 
 <?php
-	foreach ($allDeviceArray as $eachDevice){
+	foreach ($client_map as $eachDevice){
 		echo "<div class=\"device-port\">". $eachDevice['clientName'] . " : [" . $eachDevice['clientId'] . "]</div>\n";
 		echo "<ul>";
 		foreach ($eachDevice['ports'] as $portInfo){
@@ -162,7 +171,8 @@ echo "</pre>";
 				<div class="device-list">
 				<div>
 <?php
-	foreach ($allDeviceArray as $eachDevice){
+
+	foreach ($client_map as $eachDevice){
 		echo "<div class=\"device-port\">". $eachDevice['clientName'] . " : [" . $eachDevice['clientId'] . "]</div>\n";
 		echo "<ul>";
 		foreach ($eachDevice['ports'] as $portInfo){
@@ -212,7 +222,8 @@ echo "</pre>";
 			</div>
 		</div>
 	</div>
-	</div>
-		<h3 id="outputtext"></h3>
-	</div>
+</div>
+<div>
+<pre>
+</pre>
 </div>
