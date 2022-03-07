@@ -23,10 +23,10 @@ a MIDI interface/router/host add-on for the Raspberry Pi 4
 
 Demo video: https://www.instagram.com/tv/CYU_olaNODE/
 
-* The USB Host adapter is used to connect to a "USB Host" like a computer, iPad, norns, organelle, etc.
+\* The USB Host adapter is used to connect to a "USB Host" like a computer, iPad, norns, organelle, etc.
 
 
-# FAQ: 
+## FAQ: 
 
 Q: Will this work with a Raspberry Pi 2/3/3b/3b+?
 A: It's designed for Pi4 because we can take advantage ot it's 5 UARTs for the hardware MIDI I/O.  With Pi 2/3/3b/3b+ only 2 of the hardware MIDI ports will work as there's only 2 uarts.
