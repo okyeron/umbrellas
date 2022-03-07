@@ -13,6 +13,8 @@ a MIDI interface/router/host add-on for the Raspberry Pi 4
 
 - 1 USB Host adapter (USB-C with QtPy/XAIO add-on)*
 
+- Bluetooth MIDI capable  
+
 - MIDI activity leds
 
 - On/Off safe shutdown switch for Pi
