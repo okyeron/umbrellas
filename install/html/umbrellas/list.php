@@ -134,14 +134,14 @@ function list_devices($client_map, $which = "MIDI out") {
 				echo "<li class=\"device-ports\"><div class=\"linky\" onclick=\"ReplaceContentInContainer('" . $descriptioncontainer . "','" . $eachDevice['clientName'] . " " . $eachDevice['clientId'] . ":" . $portInfo[0] . "'); ReplaceContentInContainer('" . $hiddencontainer . "','" . $eachDevice['clientId'] . ":" . $portInfo[0] . "')\">$portInfo[1] : $portInfo[0]" . "</div>";
 
 				foreach ($portInfo as $portDetail) {
-					if (isset($portDetail["To"])){
+					if (isset($portDetail["To"]) && $which == "MIDI in") {
 						echo "<div>--> ";
 						foreach ($portDetail["To"] as $pts){ 
 							echo $pts . " ";
 						}
 						echo "</div>";
 					}
-					if (isset($portDetail["From"])){
+					if (isset($portDetail["From"]) && $which == "MIDI out"){
 						echo "<div><-- ";
 						foreach ($portDetail["From"] as $pts){ 
 							echo $pts . " ";
