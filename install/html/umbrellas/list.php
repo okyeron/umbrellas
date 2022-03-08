@@ -38,7 +38,15 @@ function parseDevices(&$devicedata){
 			} else {
 				$matchedID = False;
 			}
-			if (preg_match("/\d+:\s'(.*?)'/", $devicevalues, $clientName)){
+			if (preg_match("/\d+:\s'(.*?)' \[type=(.*?)\]/", $devicevalues, $clientName)){
+				// client 28: 'mioXL' [type=kernel,card=3]                                         
+				preg_match("/card=(.*+)/", $clientName[2], $card);
+				preg_match("/pid=(.*+)/", $clientName[2], $pid);
+				$type = explode(",", $clientName[2]);
+				$subarray["type"] = $type[0];
+				$subarray["card"] = $card[1];
+				$subarray["pid"] = $pid[1];
+
 				$subarray["clientName"] = $clientName[1];
 			}
 
@@ -76,7 +84,7 @@ function parseDevices(&$devicedata){
 		if ($subarray["clientId"] != ""){
 			$deviceArray[$subarray["clientId"]] = $subarray;
 		}
-// 		print_r($subarray);
+ 		//print_r($subarray);
 	}
 	
 	return $deviceArray;
@@ -94,7 +102,7 @@ foreach($allDeviceArray as $client) {
 }
 
 ksort($client_map);
-	
+
 // $inputDeviceArray = parseDevices($inputdevices);
 // asort($inputDeviceArray);
 // // 
@@ -103,6 +111,50 @@ ksort($client_map);
 // asort($outputDeviceArray);
 
 echo "</pre>";
+
+function list_devices($client_map, $which = "MIDI out") {
+	$skip = ["Midi Through", "System"];
+	switch($which) {
+		case "MIDI in":
+			$descriptioncontainer = "select-source";
+			$hiddencontainer = "source-port";
+			break;
+		case "MIDI out":
+			$descriptioncontainer = "select-target";
+			$hiddencontainer = "target-port";
+			break;
+	}
+
+	foreach ($client_map as $eachDevice){
+		if(in_array($eachDevice['clientName'], $skip)) continue;
+		echo "<div class=\"device-port\">". $eachDevice['clientName'] . " : [" . $eachDevice['clientId'] . "]</div>\n";
+		echo "<ul>";
+		foreach ($eachDevice['ports'] as $portInfo){
+			if ($portInfo[1] == $which || $eachDevice['type'] == "kernel"){
+				echo "<li class=\"device-ports\"><div class=\"linky\" onclick=\"ReplaceContentInContainer('" . $descriptioncontainer . "','" . $eachDevice['clientName'] . " " . $eachDevice['clientId'] . ":" . $portInfo[0] . "'); ReplaceContentInContainer('" . $hiddencontainer . "','" . $eachDevice['clientId'] . ":" . $portInfo[0] . "')\">$portInfo[1] : $portInfo[0]" . "</div>";
+
+				foreach ($portInfo as $portDetail) {
+					if (isset($portDetail["To"])){
+						echo "<div>--> ";
+						foreach ($portDetail["To"] as $pts){ 
+							echo $pts . " ";
+						}
+						echo "</div>";
+					}
+					if (isset($portDetail["From"])){
+						echo "<div><-- ";
+						foreach ($portDetail["From"] as $pts){ 
+							echo $pts . " ";
+						}
+						echo "</div>";
+					}
+				}
+			}
+			echo "</li>\n";
+		}
+		echo "</ul>";
+	}
+}
 ?>
 
 <div id="root">
@@ -119,88 +171,23 @@ echo "</pre>";
 		</div>
 	</div>
 
-		<div class='row'>
-			<div class='column'>
-				<div class='left-column'>
-
+	<div class='row'>
+		<div class='column'>
+			<div class='left-column'>
 				<!-- INPUTS-->
 				<div class="device-list-box">
 					<div class="device-list">
-					<div>
-
-<?php
-	foreach ($client_map as $eachDevice){
-		echo "<div class=\"device-port\">". $eachDevice['clientName'] . " : [" . $eachDevice['clientId'] . "]</div>\n";
-		echo "<ul>";
-		foreach ($eachDevice['ports'] as $portInfo){
-			if ($portInfo[1] != "MIDI out"){
-			echo "<li class=\"device-ports\"><div class=\"linky\" onclick=\"ReplaceContentInContainer('select-source','". $eachDevice['clientName'] . " " . $eachDevice['clientId'] . ":" . $portInfo[0] . "'); ReplaceContentInContainer('source-port','" . $eachDevice['clientId'] . ":" . $portInfo[0] . "')\">$portInfo[1] : $portInfo[0]" . "</div>";
-			foreach ($portInfo as $portDetail){
-			if (isset($portDetail["To"])){
-				echo "<div>--> ";
-				foreach ($portDetail["To"] as $pts){ 
-					echo $pts . " ";
-				}
-				echo "</div>";
-			}
-			if (isset($portDetail["From"])){
-				echo "<div><-- ";
-				foreach ($portDetail["From"] as $pts){ 
-					echo $pts . " ";
-				}
-				echo "</div>";
-			}
-			}
-			}
-			echo "</li>\n";
-		}
-		echo "</ul>";
-	}
-?>
-
-					</div>
+						<div><?php list_devices($client_map, "MIDI in"); ?></div>
 					</div>
 				</div>
-				</div>
+			</div>
 		</div>
 		<div class='column'>
-		  <div class='right-column'>
-
-			<!-- OUTPUTS-->
-			<div class="device-list-box">
-				<div class="device-list">
-				<div>
-<?php
-
-	foreach ($client_map as $eachDevice){
-		echo "<div class=\"device-port\">". $eachDevice['clientName'] . " : [" . $eachDevice['clientId'] . "]</div>\n";
-		echo "<ul>";
-		foreach ($eachDevice['ports'] as $portInfo){
-			if ($portInfo[1] != "MIDI in"){
-			echo "<li class=\"device-ports\"><div class=\"linky\" onclick=\"ReplaceContentInContainer('select-target','". $eachDevice['clientName'] . " " . $eachDevice['clientId'] . ":" . $portInfo[0] . "'); ReplaceContentInContainer('target-port','" . $eachDevice['clientId'] . ":" . $portInfo[0] . "')\">$portInfo[1] : $portInfo[0]" . "</div>";
-			foreach ($portInfo as $portDetail){
-			if (isset($portDetail["To"])){
-				echo "<div>--> ";
-				foreach ($portDetail["To"] as $pts){ 
-					echo $pts . " ";
-				}
-				echo "</div>";
-			}
-			if (isset($portDetail["From"])){
-				echo "<div><-- ";
-				foreach ($portDetail["From"] as $pts){ 
-					echo $pts . " ";
-				}
-				echo "</div>";
-			}
-			}
-			}
-			echo "</li>\n";
-		}
-		echo "</ul>";
-	}
-?>
-					</div>
+			<div class='right-column'>
+				<!-- OUTPUTS-->
+				<div class="device-list-box">
+					<div class="device-list">
+						<div><?php list_devices($client_map, "MIDI out"); ?></div>
 					</div>
 				</div>
       			</div>
