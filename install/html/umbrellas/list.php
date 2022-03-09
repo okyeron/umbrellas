@@ -99,6 +99,7 @@ foreach($allDeviceArray as $client) {
 		//echo $port[1] . ":" . $port[0] . "\n";
 	}
 	$client_map[$client["clientName"]] = $client;
+	$client_map_lookup[$client["clientId"]] = $client["clientName"];
 }
 
 ksort($client_map);
@@ -112,42 +113,41 @@ ksort($client_map);
 
 echo "</pre>";
 
-function list_devices($client_map, $which = "MIDI out") {
+function list_devices($client_map, $client_map_lookup, $which = "MIDI out") {
 	$skip = ["Midi Through", "System"];
-	switch($which) {
-		case "MIDI in":
-			$descriptioncontainer = "select-source";
-			$hiddencontainer = "source-port";
-			break;
-		case "MIDI out":
-			$descriptioncontainer = "select-target";
-			$hiddencontainer = "target-port";
-			break;
-	}
 
 	foreach ($client_map as $eachDevice){
 		if(in_array($eachDevice['clientName'], $skip)) continue;
+
 		echo "<div class=\"device-port\">". $eachDevice['clientName'] . " : [" . $eachDevice['clientId'] . "]</div>\n";
 		echo "<ul>";
 		foreach ($eachDevice['ports'] as $portInfo){
 			if ($portInfo[1] == $which || $eachDevice['type'] == "kernel"){
-				echo "<li class=\"device-ports\"><div class=\"linky\" onclick=\"ReplaceContentInContainer('" . $descriptioncontainer . "','" . $eachDevice['clientName'] . " " . $eachDevice['clientId'] . ":" . $portInfo[0] . "'); ReplaceContentInContainer('" . $hiddencontainer . "','" . $eachDevice['clientId'] . ":" . $portInfo[0] . "')\">$portInfo[1] : $portInfo[0]" . "</div>";
+				echo "<li class=\"device-ports\">
+					<a class=\"linky\" which=\"$which\" clientName=\"" . $eachDevice['clientName'] . "\" clientId=\"" . $eachDevice['clientId'] . "\" portId=\"" . $portInfo[0] . "\">$portInfo[1] : $portInfo[0]" . "</a>";
 
 				foreach ($portInfo as $portDetail) {
+					// Setting this up here to consolidate the following HTML
 					if (isset($portDetail["To"]) && $which == "MIDI in") {
-						echo "<div>--> ";
-						foreach ($portDetail["To"] as $pts){ 
-							echo $pts . " ";
-						}
-						echo "</div>";
+						$index = "To";
+						$arrow = "-->";
 					}
-					if (isset($portDetail["From"]) && $which == "MIDI out"){
-						echo "<div><-- ";
-						foreach ($portDetail["From"] as $pts){ 
-							echo $pts . " ";
-						}
-						echo "</div>";
+					else if (isset($portDetail["From"]) && $which == "MIDI out"){
+						$index = "From";
+						$arrow = "<--";
 					}
+					else {
+						continue;
+					}
+
+					echo "<div>";
+					foreach ($portDetail[$index] as $pts){ 
+						$info = explode(":", $pts);
+						echo $arrow . " " .$client_map_lookup[$info[0]] . "(" . $info[0] . "):" . $info[1] . " ";
+						echo "<a class=\"delete_connection\" from=\"" . $eachDevice['clientId'] . ":" . $portInfo[0] . "\" to=\"$pts\" href=\"#\">Delete</a>";
+						echo "<br/>";
+					}
+					echo "</div>";
 				}
 			}
 			echo "</li>\n";
@@ -177,7 +177,7 @@ function list_devices($client_map, $which = "MIDI out") {
 				<!-- INPUTS-->
 				<div class="device-list-box">
 					<div class="device-list">
-						<div><?php list_devices($client_map, "MIDI in"); ?></div>
+						<div><?php list_devices($client_map, $client_map_lookup, "MIDI in"); ?></div>
 					</div>
 				</div>
 			</div>
@@ -187,7 +187,7 @@ function list_devices($client_map, $which = "MIDI out") {
 				<!-- OUTPUTS-->
 				<div class="device-list-box">
 					<div class="device-list">
-						<div><?php list_devices($client_map, "MIDI out"); ?></div>
+						<div><?php list_devices($client_map, $client_map_lookup,  "MIDI out"); ?></div>
 					</div>
 				</div>
       			</div>
@@ -198,14 +198,14 @@ function list_devices($client_map, $which = "MIDI out") {
 			<div class='left-column'>
 				<div class="selectedItem" id="select-source"></div>
 				<button id="connectbutton" onclick="aconnector('connect')">Connect</button>
-				<input type="text" id="source-port" name="source-port">
+				<input type="hidden" id="source-port" name="source-port">
 			</div>
 		</div>
 		<div class='column'>
 			<div class='right-column'>
 				<div class="selectedItem" id="select-target"></div>
 				<button class="red" id="disconnectbutton" onclick="aconnector('disconnect')">Disconnect</button>			
-				<input type="text" id="target-port" name="target-port">
+				<input type="hidden" id="target-port" name="target-port">
 			</div>
 		</div>
 	</div>
