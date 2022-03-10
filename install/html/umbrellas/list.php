@@ -142,9 +142,14 @@ function list_devices($client_map, $client_map_lookup, $which = "MIDI out") {
 
 					echo "<div>";
 					foreach ($portDetail[$index] as $pts){ 
+						// Is weird
+						$from = $eachDevice['clientId'] . ":" . $portInfo[0];
+						$to = $pts;
+
 						$info = explode(":", $pts);
-						echo $arrow . " " .$client_map_lookup[$info[0]] . "(" . $info[0] . "):" . $info[1] . " ";
-						echo "<a class=\"delete_connection\" from=\"" . $eachDevice['clientId'] . ":" . $portInfo[0] . "\" to=\"$pts\" href=\"#\">Delete</a>";
+
+						echo $arrow . " " .$client_map_lookup[$info[0]] . " (" . $info[0] . ") : " . $info[1] . " ";
+						echo "<a class=\"disconnect\" direction=\"$index\" from=\"$from\" to=\"$to\" href=\"#\">[Disconnect]</a>";
 						echo "<br/>";
 					}
 					echo "</div>";

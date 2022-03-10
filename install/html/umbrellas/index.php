@@ -37,13 +37,21 @@
 				ClickedItem(this);
 			});
 
-			$(".delete_connection").click(function(e) {
-				if(window.confirm("Delete connection?")) {
-					let from = $(this).attr("from");
-					let to = $(this).attr("to");
+			$(".disconnect").click(function(e) {
+				let from = $(this).attr("from");
+				let to = $(this).attr("to");
+				let direction = $(this).attr("direction");
+
+				if(direction == "To") {
 					$("#source-port").val(from);
 					$("#target-port").val(to);
+				}
+				else {
+					$("#source-port").val(to);
+					$("#target-port").val(from);
+				}
 
+				if(window.confirm("Disconnect connection?")) {
 					if(from != null && to != null)
 						aconnector('disconnect');
 				}
