@@ -8,6 +8,7 @@ $inputsoutputs = shell_exec('aconnect -l 2>&1');
 $allDeviceArray = [];
 // $inputDeviceArray = [];
 // $outputDeviceArray = [];
+$saverArray = [];
 
 $alldevices = preg_split("/client\s/", $inputsoutputs, -1, PREG_SPLIT_NO_EMPTY);
 // $inputdevices = preg_split("/client\s/", $inputs, -1, PREG_SPLIT_NO_EMPTY);
@@ -18,6 +19,9 @@ $alldevices = preg_split("/client\s/", $inputsoutputs, -1, PREG_SPLIT_NO_EMPTY);
 function trim_value(&$value) 
 { 
     $value = trim($value); 
+}
+function string_starts_with ( $haystack, $needle ) {
+  return strpos( $haystack , $needle ) === 0;
 }
 
 function parseDevices(&$devicedata){
@@ -104,6 +108,15 @@ foreach($allDeviceArray as $client) {
 
 ksort($client_map);
 
+
+// SAVEY GRAVY
+
+if ($_GET['save'] == 1){
+	// This will loop on the client_map, generate an array then save that to the rules file.
+	$saveme = make_save_array($client_map, $client_map_lookup, "MIDI in");
+	writeToRulesFile(parseAndSave($saveme));
+}
+
 // $inputDeviceArray = parseDevices($inputdevices);
 // asort($inputDeviceArray);
 // // 
@@ -112,6 +125,80 @@ ksort($client_map);
 // asort($outputDeviceArray);
 
 echo "</pre>";
+
+function make_save_array($client_map, $client_map_lookup, $which = "MIDI out") {
+	$skip = ["Midi Through", "System"];
+	
+	foreach ($client_map as $eachDevice){
+		if(in_array($eachDevice['clientName'], $skip)) continue;
+		foreach ($eachDevice['ports'] as $portInfo){
+			foreach ($portInfo as $portDetail) {
+				if (isset($portDetail["To"]) && $which == "MIDI in") {
+					$index = "To";
+				}
+				else if (isset($portDetail["From"]) && $which == "MIDI out"){
+					$index = "From";
+				}
+				foreach ($portDetail[$index] as $pts){ 
+					// Is weird
+					$from = [$eachDevice['clientName'], $portInfo[0]];
+					$to = $pts;
+					$info = explode(":", $pts);
+					$dest = [$client_map_lookup[$info[0]], $info[1]];
+					$saverArray[] = ["from" => $from, "to" => $dest];
+				}
+			}
+		}
+	}
+	return $saverArray;
+}
+
+function parseAndSave($saver){
+	$saveOutput = "";
+	foreach ($saver as $saveDevice){
+		$fromClient = $saveDevice["from"][0];
+		$fromPort= $saveDevice["from"][1];
+		$toClient = $saveDevice["to"][0];
+		$toPort = $saveDevice["to"][1];
+		
+		$outputString = "";
+		if (string_starts_with($fromClient, 'umbrellas')) { 
+ 			$outputString = $fromClient;
+		} else {
+			$outputString = $fromClient . ":" . $fromPort;
+		}
+		$outputString = $outputString . " --> ";
+		if (string_starts_with($toClient, "umbrellas")){ 
+ 			$outputString = $outputString . $toClient;
+		} else {
+			$outputString = $outputString . $toClient . ":" . $toPort;
+		} 
+ 		$saveOutput = $saveOutput. $outputString . "\n";
+	}
+	return $saveOutput;
+}
+
+function writeToRulesFile($saveString){
+	// Read rules file into array
+	$rulesfile = '/etc/amidiminder.rules';
+	$lines = file($rulesfile);
+	$handle = fopen($rulesfile,"w") or die("Unable to open file!");
+
+	// Loop through our rules file array, re-write everything until WEBCONFIG
+	foreach ($lines as $line_num => $line) {
+		if ($line == "###WEBCONFIG###\n"){
+			fwrite($handle,$line);
+			break;
+		} else {
+			fwrite($handle,$line);
+		}
+	}
+	// Write new rules here
+	fwrite($handle, $saveString);
+
+	// Close file handle
+	fclose($handle);
+}
 
 function list_devices($client_map, $client_map_lookup, $which = "MIDI out") {
 	$skip = ["Midi Through", "System"];
