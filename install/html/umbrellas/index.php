@@ -28,13 +28,22 @@
 		});
 	}
 
-	function reloadList() {
-		$("#list").load("list.php", function() {
+	function reloadList(save = false) {
+		if(save)
+			link = "list.php?save=1";
+		else
+			link = "list.php";
+
+		$("#list").load(link, function() {
 			// Set up click handlers on "success" of loading list.php
 			// Have to wait to do this so everything in list.php has been added to the DOM
 			$(".linky").click(function(e) {
 				console.log($(this).attr("descriptioncontainer"));
 				ClickedItem(this);
+			});
+
+			$("#save").click(function(e) {
+				reloadList(true);
 			});
 
 			$(".disconnect").click(function(e) {
@@ -93,5 +102,7 @@
 		<h3 id="outputtext"></h3>
 	</div>
 </center>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

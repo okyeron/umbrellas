@@ -114,7 +114,7 @@ ksort($client_map);
 if ($_GET['save'] == 1){
 	// This will loop on the client_map, generate an array then save that to the rules file.
 	$saveme = make_save_array($client_map, $client_map_lookup, "MIDI in");
-	writeToRulesFile(parseAndSave($saveme));
+	$savestatus = writeToRulesFile(parseAndSave($saveme));
 }
 
 // $inputDeviceArray = parseDevices($inputdevices);
@@ -180,9 +180,11 @@ function parseAndSave($saver){
 
 function writeToRulesFile($saveString){
 	// Read rules file into array
-	$rulesfile = '/etc/amidiminder.rules';
+	$rulesfile = '/etc/amidiminder.ruleslol';
 	$lines = file($rulesfile);
-	$handle = fopen($rulesfile,"w") or die("Unable to open file!");
+	$handle = fopen($rulesfile,"w");
+	if(!$handle)
+		return "Unable to open file! Please check /etc/amidiminder.rules permissions";
 
 	// Loop through our rules file array, re-write everything until WEBCONFIG
 	foreach ($lines as $line_num => $line) {
@@ -198,6 +200,10 @@ function writeToRulesFile($saveString){
 
 	// Close file handle
 	fclose($handle);
+
+	// TODO: Probably want some error checking here?
+
+	return "Saved!";
 }
 
 function list_devices($client_map, $client_map_lookup, $which = "MIDI out") {
@@ -236,7 +242,7 @@ function list_devices($client_map, $client_map_lookup, $which = "MIDI out") {
 						$info = explode(":", $pts);
 
 						echo $arrow . " " .$client_map_lookup[$info[0]] . " (" . $info[0] . ") : " . $info[1] . " ";
-						echo "<a class=\"disconnect\" direction=\"$index\" from=\"$from\" to=\"$to\" href=\"#\">[Disconnect]</a>";
+						echo "<a class=\"disconnect\" direction=\"$index\" from=\"$from\" to=\"$to\" href=\"#\"><ion-icon name=\"close-circle-outline\" style=\"color:red;\"></ion-icon></a>";
 						echo "<br/>";
 					}
 					echo "</div>";
@@ -251,7 +257,11 @@ function list_devices($client_map, $client_map_lookup, $which = "MIDI out") {
 
 <div id="root">
 	<div class="root-container">
-	<h1>Connections</h1>
+	<h1>
+<ion-icon name="umbrella-outline"></ion-icon> Connections <ion-icon name="umbrella-outline"></ion-icon></h1>
+<button id="save">Save</button>
+	<?=$savestatus?>
+
 	<div class='container-wrapper'>
 
 	<div class='row'>
