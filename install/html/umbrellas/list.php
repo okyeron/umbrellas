@@ -260,6 +260,7 @@ function list_devices($client_map, $client_map_lookup, $which = "MIDI out") {
 	<h1>
 <ion-icon name="umbrella-outline"></ion-icon> Connections <ion-icon name="umbrella-outline"></ion-icon></h1>
 <button id="save">Save</button>
+<br/>
 	<?=$savestatus?>
 
 	<div class='container-wrapper'>
