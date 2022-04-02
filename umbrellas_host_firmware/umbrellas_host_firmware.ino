@@ -28,7 +28,7 @@ Adafruit_NeoPixel onePixel = Adafruit_NeoPixel(1, 11, NEO_GRB + NEO_KHZ800);
 // A variable to know how long the LED has been turned on
 elapsedMillis ledOnMillis;
 
-bool activity = false;
+bool activity = true;
 
 // DEVICE INFO FOR ADAFRUIT M0 or M4 
 char mfgstr[32] = "denki-oto";
@@ -37,16 +37,20 @@ char prodstr[32] = "umbrellas-host";
 void setup() {
     USBDevice.setManufacturerDescriptor(mfgstr);
     USBDevice.setProductDescriptor(prodstr);
+
     
-    MIDI1.begin(MIDI_CHANNEL_OMNI);
     MIDI2.begin(MIDI_CHANNEL_OMNI);
+    MIDI1.begin(MIDI_CHANNEL_OMNI);
     MIDI1.turnThruOff();
     MIDI2.turnThruOff();
+
+    digitalWrite(A7, LOW);
+    digitalWrite(A6, HIGH);
 
     Serial.begin(115200);
 
     // wait until device mounted
-    while ( !USBDevice.mounted() ) delay(1);
+//    while ( !USBDevice.mounted() ) delay(1);
 
     onePixel.begin();                           // Start the NeoPixel object
     onePixel.clear();                           // Set NeoPixel color to black (0,0,0)
@@ -57,6 +61,7 @@ void setup() {
     delay(200);
     onePixel.clear();
     onePixel.show();                            // Update the pixel state
+
 
 }
 
