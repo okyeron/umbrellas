@@ -54,9 +54,18 @@ turn on discoverable on umbrellas
 		`bluetoothctl`
 		`discoverable on`
 
-connect from your device and pair
+		`scan on`
 
-from bluetoothctl you may also need to trust and then connect that device.
+	turn on "Advertise MIDI Service" in your MIDI App if you want to transmit from the BT device. 
+	you may only need to do this the first time.
+
+	find your device MAC address
+	
+		`connect XX:XX:XX:XX:XX`
+		`trust XX:XX:XX:XX:XX`
+		`pair XX:XX:XX:XX:XX`
+
 ```
+After this setup, the `umbrellas Bluetooth` device should show up to your MIDI App
 
 Once your device is connected it should show up in the web application as a MIDI device.
