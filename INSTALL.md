@@ -45,11 +45,11 @@ This should now show you a QTPY_BOOT drive on your computer desktop. Drag the UF
 
 # OPTIONAL
 
-### protokol 
+### protokol (desktop app for midi monitoring)
 ```
-wget https://hexler.net/pub/protokol/protokol-0.4.2.84-linux-armhf.deb
-sudo apt-get install ./protokol-0.4.2.84-linux-armhf.deb
-sudo rm protokol-0.4.2.84-linux-armhf.deb
+wget https://hexler.net/pub/protokol/protokol-0.4.4.86-linux-armhf.deb
+sudo apt-get install ./protokol-0.4.4.86-linux-armhf.deb
+sudo rm protokol-0.4.4.86-linux-armhf.deb
 ```
 
 ### osmid  
