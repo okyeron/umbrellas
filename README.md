@@ -55,6 +55,8 @@ turn on discoverable on umbrellas
 		`discoverable on`
 
 connect from your device and pair
+
+from bluetoothctl you may also need to trust and then connect that device.
 ```
 
 Once your device is connected it should show up in the web application as a MIDI device.
