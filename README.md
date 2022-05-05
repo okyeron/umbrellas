@@ -39,6 +39,12 @@ A: It's designed for Pi4 because we can take advantage ot it's 5 UARTs for the h
  
 See [INSTALL.md](INSTALL.md)
 
+
+## Web interface
+
+Visit http://umbrellas.local/ from a computer on the same wifi network as umbrellas. Or you can use SSH and the `aconnect` command to make midi connections.  
+
+
 ## Bluetooth
 
 ```
