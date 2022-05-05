@@ -27,6 +27,10 @@ Demo video: https://www.instagram.com/tv/CYU_olaNODE/
 
 \* The USB Host adapter is used to connect to a "USB Host" like a computer, iPad, norns, organelle, etc.
 
+## Build 
+
+Youtube:  
+https://www.youtube.com/watch?v=L5gbAhstF64&list=PLYhX2rtncmtNOISmfAu80U1FvVtGJeNjO
 
 ## FAQ: 
 
@@ -36,7 +40,7 @@ A: Not entirely. It's designed for Pi4 because we can take advantage ot it's 5 U
 
 
  
-## Setup and install
+## Software Setup and install
  
 See [INSTALL.md](INSTALL.md)
 
