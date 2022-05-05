@@ -1,4 +1,4 @@
-# UMBRELLAS INSTALL
+# UMBRELLAS MANUAL INSTALL PROCESS
 
 ### Start with a fresh copy of RasPiOS 
 
