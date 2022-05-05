@@ -45,7 +45,7 @@ See [INSTALL.md](INSTALL.md)
 Visit http://umbrellas.local/ from a computer on the same wifi network as umbrellas. Or you can use SSH and the `aconnect` command to make midi connections.  
 
 
-## Bluetooth
+## Bluetooth (work in progress - may not work)
 
 ```
 turn on discoverable on umbrellas 
