@@ -30,8 +30,9 @@ Demo video: https://www.instagram.com/tv/CYU_olaNODE/
 
 ## FAQ: 
 
-Q: Will this work with a Raspberry Pi 2/3/3b/3b+?
-A: It's designed for Pi4 because we can take advantage ot it's 5 UARTs for the hardware MIDI I/O.  With Pi 2/3/3b/3b+ only 2 of the hardware MIDI ports will work as there's only 2 uarts.
+Q: Will this work with a Raspberry Pi 2/3/3b/3b+?  
+
+A: It's designed for Pi4 because we can take advantage ot it's 5 UARTs for the hardware MIDI I/O.  With Pi 2/3/3b/3b+ only 2 of the hardware MIDI ports will work as there's only 2 uarts.  
 
 
  
