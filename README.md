@@ -32,6 +32,8 @@ Demo video: https://www.instagram.com/tv/CYU_olaNODE/
 Youtube:  
 https://www.youtube.com/watch?v=L5gbAhstF64&list=PLYhX2rtncmtNOISmfAu80U1FvVtGJeNjO
 
+See [BUILD.md](BUILD.md)
+
 ## FAQ: 
 
 Q: Will this work with a Raspberry Pi 2/3/3b/3b+?  
