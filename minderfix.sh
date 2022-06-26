@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sudo rm -r ~/umbrellas/ttymidi/amidiminder
+sudo rm -r /home/pi/umbrellas/ttymidi/amidiminder
 
 cd ~/umbrellas
 git clone https://github.com/mzero/amidiminder.git
