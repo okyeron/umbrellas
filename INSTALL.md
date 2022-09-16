@@ -8,7 +8,7 @@ Raspberry Pi OS with desktop is recommended if you want to occasionally connect 
 
 Raspberry Pi Imager will handle the disk image download for you - you should select the most recent Raspberry Pi OS (32-bit) from the operating system menu - or you can choose others. 
 
-Before you "Write" the image - click the "gear" icon and set advanced options. Here you will want to enable SSH, set username and password and enable WiFi. __Be sure to create a `pi` user. __ (this is required by the install script). You can also set your locale, timezone, etc. in these advanced settings.
+Before you "Write" the image - click the "gear" icon and set advanced options. Here you will want to enable SSH, set username and password and enable WiFi. In Raspberry Pi Imager __be sure to create a `pi` user. __ (this is required by the install script). Note - Do not create a differently named user as various processes expect the primary user to be `pi`. In advanced options, you can also set your locale, timezone, etc. 
 
 If you want to do that config manually - Then after the image is burned, re-mount the SD Card and add an `ssh` and a `wpa-supplicant.conf` file to the to the boot partition. For ssh this is just an empty text file named `ssh`. [See the documentation for details](https://www.raspberrypi.com/documentation/computers/configuration.html#setting-up-a-headless-raspberry-pi) on setting up `wpa-supplicant.conf` file to enable wifi for headless use.
 
