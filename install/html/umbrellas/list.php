@@ -180,11 +180,11 @@ function parseAndSave($saver){
 
 function writeToRulesFile($saveString){
 	// Read rules file into array
-	$rulesfile = '/etc/amidiminder.ruleslol';
+	$rulesfile = '/home/pi/umbrellas/amidiminder.rules';
 	$lines = file($rulesfile);
 	$handle = fopen($rulesfile,"w");
 	if(!$handle)
-		return "Unable to open file! Please check /etc/amidiminder.rules permissions";
+		return "Unable to open file! Please check /home/pi/umbrellas/amidiminder.rules permissions";
 
 	// Loop through our rules file array, re-write everything until WEBCONFIG
 	foreach ($lines as $line_num => $line) {
