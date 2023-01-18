@@ -11,6 +11,8 @@ Youtube: https://www.youtube.com/watch?v=L5gbAhstF64&list=PLYhX2rtncmtNOISmfAu80
 
 QTPy should go on the bottom (picture side) of the umbrellas bottom pcb (the small one) - so the USB jack is in line with the umbrellas pcb. Note - you only need to solder the "corner" pin positions plus the ground pin (those are marked A0, A6/TX, 5V, A7/RX, GND).   
 
+If in doubt, just solder all the connections.  
+
 Use the castellated pads or pin headers if you're more comfortable with those.  
 
 ![<#QTPy position#>](<images/IMG_6183.jpg > "<#QTPy position#>")
