@@ -1,6 +1,6 @@
 # UMBRELLAS INSTALL
 
-### Start with a fresh copy of RasPiOS 
+### Start with a fresh copy of RasPiOS (Legacy/Bullseye)
 
 Use the [Raspberry Pi Imager](https://www.raspberrypi.com/software/) tool (Do not use [balana etcher](https://www.balena.io/etcher/?ref=etcher_menu) in this case as the RasPi tool adds some extra features we need) If Pi Imager does not work on your system you will need to configure your user/password manually - [See the documentation](https://www.raspberrypi.com/documentation/computers/configuration.html#configuring-a-user).
 
