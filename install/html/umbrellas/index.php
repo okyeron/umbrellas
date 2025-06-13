@@ -79,11 +79,11 @@
 		portId = $(item).attr("portId");
 
 		switch(which) {
-			case "MIDI in":
+			case "MIDI In":
 				descriptioncontainer = "select-source";
 				hiddencontainer = "source-port";
 				break;
-			case "MIDI out":
+			case "MIDI Out":
 				descriptioncontainer = "select-target";
 				hiddencontainer = "target-port";
 				break;

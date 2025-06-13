@@ -98,9 +98,10 @@ $allDeviceArray = parseDevices($alldevices);
 asort($allDeviceArray);
 
 foreach($allDeviceArray as $client) {
-	//echo $client["clientId"] . " = " . $client["clientName"] . "\n";
+// 	echo $client["clientId"] . " = " . $client["clientName"] . "\n";
+// 	print_r($client['type']);
 	foreach($client["ports"] as $port) {
-		//echo $port[1] . ":" . $port[0] . "\n";
+// 		echo $port[1] . ":" . $port[0] . "\n";
 	}
 	$client_map[$client["clientName"]] = $client;
 	$client_map_lookup[$client["clientId"]] = $client["clientName"];
@@ -113,7 +114,7 @@ ksort($client_map);
 
 if ($_GET['save'] == 1){
 	// This will loop on the client_map, generate an array then save that to the rules file.
-	$saveme = make_save_array($client_map, $client_map_lookup, "MIDI in");
+	$saveme = make_save_array($client_map, $client_map_lookup, "MIDI In");
 	$savestatus = writeToRulesFile(parseAndSave($saveme));
 }
 
@@ -126,17 +127,17 @@ if ($_GET['save'] == 1){
 
 echo "</pre>";
 
-function make_save_array($client_map, $client_map_lookup, $which = "MIDI out") {
+function make_save_array($client_map, $client_map_lookup, $which = "MIDI Out") {
 	$skip = ["Midi Through", "System"];
 	
 	foreach ($client_map as $eachDevice){
 		if(in_array($eachDevice['clientName'], $skip)) continue;
 		foreach ($eachDevice['ports'] as $portInfo){
 			foreach ($portInfo as $portDetail) {
-				if (isset($portDetail["To"]) && $which == "MIDI in") {
+				if (isset($portDetail["To"]) && $which == "MIDI In") {
 					$index = "To";
 				}
-				else if (isset($portDetail["From"]) && $which == "MIDI out"){
+				else if (isset($portDetail["From"]) && $which == "MIDI Out"){
 					$index = "From";
 				}
 				foreach ($portDetail[$index] as $pts){ 
@@ -188,7 +189,7 @@ function writeToRulesFile($saveString){
 
 	// Loop through our rules file array, re-write everything until WEBCONFIG
 	foreach ($lines as $line_num => $line) {
-		if ($line == "###WEBCONFIG###\n"){
+		if ($line == "###WEBEDIT###\n"){
 			fwrite($handle,$line);
 			break;
 		} else {
@@ -206,7 +207,7 @@ function writeToRulesFile($saveString){
 	return "Saved!";
 }
 
-function list_devices($client_map, $client_map_lookup, $which = "MIDI out") {
+function list_devices($client_map, $client_map_lookup, $which = "MIDI Out") {
 	$skip = ["Midi Through", "System"];
 
 	foreach ($client_map as $eachDevice){
@@ -215,17 +216,18 @@ function list_devices($client_map, $client_map_lookup, $which = "MIDI out") {
 		echo "<div class=\"device-port\">". $eachDevice['clientName'] . " : [" . $eachDevice['clientId'] . "]</div>\n";
 		echo "<ul>";
 		foreach ($eachDevice['ports'] as $portInfo){
+// 			if ($portInfo[1] == $which ){
 			if ($portInfo[1] == $which || $eachDevice['type'] == "kernel"){
 				echo "<li class=\"device-ports\">
 					<a class=\"linky\" which=\"$which\" clientName=\"" . $eachDevice['clientName'] . "\" clientId=\"" . $eachDevice['clientId'] . "\" portId=\"" . $portInfo[0] . "\">$portInfo[1] : $portInfo[0]" . "</a>";
 
 				foreach ($portInfo as $portDetail) {
 					// Setting this up here to consolidate the following HTML
-					if (isset($portDetail["To"]) && $which == "MIDI in") {
+					if (isset($portDetail["To"]) && $which == "MIDI In") {
 						$index = "To";
 						$arrow = "-->";
 					}
-					else if (isset($portDetail["From"]) && $which == "MIDI out"){
+					else if (isset($portDetail["From"]) && $which == "MIDI Out"){
 						$index = "From";
 						$arrow = "<--";
 					}
@@ -280,7 +282,7 @@ function list_devices($client_map, $client_map_lookup, $which = "MIDI out") {
 				<!-- INPUTS-->
 				<div class="device-list-box">
 					<div class="device-list">
-						<div><?php list_devices($client_map, $client_map_lookup, "MIDI in"); ?></div>
+						<div><?php list_devices($client_map, $client_map_lookup, "MIDI In"); ?></div>
 					</div>
 				</div>
 			</div>
@@ -290,7 +292,7 @@ function list_devices($client_map, $client_map_lookup, $which = "MIDI out") {
 				<!-- OUTPUTS-->
 				<div class="device-list-box">
 					<div class="device-list">
-						<div><?php list_devices($client_map, $client_map_lookup,  "MIDI out"); ?></div>
+						<div><?php list_devices($client_map, $client_map_lookup,  "MIDI Out"); ?></div>
 					</div>
 				</div>
       			</div>
