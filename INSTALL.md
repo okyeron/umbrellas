@@ -25,6 +25,7 @@ If running headless you'll want to connect over SSH. Use a tool like [LanScan](h
 ### Download umbrellas code and run install
 
 ```
+sudo apt-get install git
 cd ~
 git clone https://github.com/okyeron/umbrellas.git
 cd umbrellas
