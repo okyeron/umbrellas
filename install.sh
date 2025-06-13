@@ -33,7 +33,7 @@ make
 sudo make install
 
 cd ~/umbrellas
-wget https://github.com/mzero/amidiminder/releases/download/0.70/amidiminder_0.70_armhf.deb
+wget https://github.com/mzero/midiminder/releases/download/0.70/amidiminder_0.70_armhf.deb
 sudo dpkg -i amidiminder_0.70_armhf.deb
 
 sudo cp --remove-destination /home/pi/umbrellas/install/amidiminder.rules  /home/pi/umbrellas/amidiminder.rules
