@@ -113,12 +113,12 @@ make
 sudo make install
 ```
 
-### amidiminder  
+### midiminder  
 ```
-git clone https://github.com/mzero/amidiminder.git
-cd amidiminder
-make
-sudo dpkg -i build/amidiminder.deb
+cd ~/umbrellas
+wget https://github.com/mzero/midiminder/releases/download/0.70/amidiminder_0.70_armhf.deb
+sudo dpkg -i amidiminder_0.70_armhf.deb
+
 ```
 remove default setup from `/etc/amidiminder.rules`  
 
