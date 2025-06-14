@@ -207,6 +207,12 @@ function writeToRulesFile($saveString){
 	return "Saved!";
 }
 
+if (!function_exists('str_contains')) {
+    function str_contains (string $haystack, string $needle)
+    {
+        return empty($needle) || strpos($haystack, $needle) !== false;
+    }
+}
 function list_devices($client_map, $client_map_lookup, $which = "MIDI Out") {
 	$skip = ["Midi Through", "System"];
 
@@ -217,7 +223,13 @@ function list_devices($client_map, $client_map_lookup, $which = "MIDI Out") {
 		echo "<ul>";
 		foreach ($eachDevice['ports'] as $portInfo){
 // 			if ($portInfo[1] == $which ){
-			if ($portInfo[1] == $which || $eachDevice['type'] == "kernel"){
+			$btstring = strtolower($portInfo[1]);
+			if (str_contains($btstring, 'bluetooth')){
+				$isbluetooth = true;
+			}else{
+				$isbluetooth = false;
+			}
+			if ($portInfo[1] == $which || $eachDevice['type'] == "kernel" || $isbluetooth ){
 				echo "<li class=\"device-ports\">
 					<a class=\"linky\" which=\"$which\" clientName=\"" . $eachDevice['clientName'] . "\" clientId=\"" . $eachDevice['clientId'] . "\" portId=\"" . $portInfo[0] . "\">$portInfo[1] : $portInfo[0]" . "</a>";
 
