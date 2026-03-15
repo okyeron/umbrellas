@@ -2,7 +2,7 @@
 
 ### Start with a fresh copy of RasPiOS (Legacy/Bookworm)
 
-Use the [Raspberry Pi Imager](https://www.raspberrypi.com/software/) tool (__Do not use [balana etcher](https://www.balena.io/etcher/?ref=etcher_menu__) in this case as the RasPi tool adds some extra features we need) If Pi Imager does not work on your system you will need to configure your user/password manually - [See the documentation](https://www.raspberrypi.com/documentation/computers/configuration.html#configuring-a-user).
+Use the [Raspberry Pi Imager](https://www.raspberrypi.com/software/) tool __Do not use__  [balana etcher](https://www.balena.io/etcher/?ref=etcher_menu) in this case as the RasPi tool adds some extra features we need) If Pi Imager does not work on your system you will need to configure your user/password manually - [See the documentation](https://www.raspberrypi.com/documentation/computers/configuration.html#configuring-a-user).
 
 Raspberry Pi OS Lite should be used for a fully headless setup. Raspberry Pi OS with desktop is only recommended if you want to occasionally connect an HDMI display or run other software.
 
