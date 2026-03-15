@@ -4,7 +4,7 @@ sudo apt update
 sudo apt-get update
 sudo apt-get install -y git bc g++ make i2c-tools libudev-dev libevdev-dev liblo-dev libavahi-compat-libdnssd-dev libasound2-dev libncurses5-dev
 sudo apt install -y rpi-eeprom
-sudo apt install -y php php-fpm nginx
+sudo apt install -y php php-fpm
 
 sudo adduser pi www-data
 sudo adduser www-data audio
@@ -18,9 +18,11 @@ sudo systemctl enable ttymidi2.service
 sudo systemctl enable ttymidi3.service 
 sudo systemctl enable ttymidi4.service 
 
-sudo sed -i s/console=serial0,115200// /boot/cmdline.txt
-sudo cp --remove-destination /home/pi/umbrellas/install/boot/config.txt  /boot/config.txt
-sudo cp --remove-destination /home/pi/umbrellas/install/webserver/default  /etc/nginx/sites-available/default
+sudo sed -i s/console=serial0,115200// /boot/firmware/cmdline.txt
+sudo cp --remove-destination /home/pi/umbrellas/install/boot/config.txt  /boot/firmware/config.txt
+# sudo cp --remove-destination /home/pi/umbrellas/install/webserver/default  /etc/nginx/sites-available/default
+sudo cp --remove-destination /home/pi/umbrellas/install/webserver/000-default.conf /etc/apache2/sites-available/000-default.conf
+
 sudo cp -r --remove-destination /home/pi/umbrellas/install/html/umbrellas  /var/www/html/umbrellas
 sudo chown -R www-data:www-data /var/www/html/umbrellas
 sudo chmod -R 755 /var/www/html/umbrellas/

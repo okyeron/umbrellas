@@ -3,7 +3,7 @@ Description=ttyMIDI daemon
 After=sound.target
 
 [Service]
-ExecStart=/usr/bin/ttymidi -s /dev/ttyAMA3 -b 38400 -n umbrellas_3
+ExecStart=/usr/bin/ttymidi -s /dev/ttyAMA4 -b 38400 -n umbrellas_3
 EnvironmentFile=/etc/environment
 
 [Install]

@@ -25,6 +25,8 @@ If running headless you'll want to connect over SSH. Use a tool like [LanScan](h
 
 # UMBRELLAS INSTALL - MANUAL SETUP
 
+### THIS MAY BE OUT OF DATE ON DEBIAN BOOKWORM - Use script install instead
+
 
 ### RasPi installs  
 

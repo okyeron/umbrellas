@@ -6,9 +6,11 @@ Use the [Raspberry Pi Imager](https://www.raspberrypi.com/software/) tool (Do no
 
 Raspberry Pi OS with desktop is recommended if you want to occasionally connect an HDMI display or run other software. Raspberry Pi OS Lite should also be fine for a fully headless setup.
 
-Raspberry Pi Imager will handle the disk image download for you - you should select the most recent Raspberry Pi OS (32-bit) from the operating system menu - or you can choose others. 
+Raspberry Pi Imager will handle the disk image download for you - for most uses you should select the Raspberry Pi OS Lite (Legacy 32-bit aka Bookworm) from the operating system menu. (This will be in the "Others" section)
 
-Before you "Write" the image - click the "gear" icon and set advanced options. Here you will want to enable SSH, set username and password and enable WiFi. In Raspberry Pi Imager __be sure to create a `pi` user. __ (this is required by the install script). Note - Do not create a differently named user as various processes expect the primary user to be `pi`. In advanced options, you can also set your locale, timezone, etc. 
+The app should walk you thru the process of setting advanced options like the username (use "pi"), password, the hostname (set to "umbrellas") and your wifi setup along with locale, timezone, etc. 
+
+In Raspberry Pi Imager __be sure to create a `pi` user. __ (this is required by the install script). Do not create a differently named user as various processes expect the primary user to be `pi`.
 
 If you want to do that config manually - Then after the image is burned, re-mount the SD Card and add an `ssh` and a `wpa-supplicant.conf` file to the to the boot partition. For ssh this is just an empty text file named `ssh`. [See the documentation for details](https://www.raspberrypi.com/documentation/computers/configuration.html#setting-up-a-headless-raspberry-pi) on setting up `wpa-supplicant.conf` file to enable wifi for headless use.
 
@@ -19,13 +21,14 @@ The pi should go through a process of starting and then rebooting
 
 If running desktop with a monitor attached, follow on-screen wizard for setup.
 
-If running headless you'll want to connect over SSH. Use a tool like [LanScan](https://apps.apple.com/us/app/lanscan/id472226235) to find the IP address.
+If running headless you'll want to connect over SSH. Use a tool like [LanScan](https://apps.apple.com/us/app/lanscan/id472226235) to find the IP address (or use the hostname you setup in the Raspberry Pi Imager steps - `umbrellas.local` )
 
 
 ### Download umbrellas code and run install
 
 ```
-sudo apt-get install git
+sudo apt update
+sudo apt install git
 cd ~
 git clone https://github.com/okyeron/umbrellas.git
 cd umbrellas
