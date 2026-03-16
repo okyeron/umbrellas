@@ -112,7 +112,7 @@ ksort($client_map);
 
 // SAVEY GRAVY
 
-if ($_GET['save'] == 1){
+if (($_GET['save'] ?? null) == 1){
 	// This will loop on the client_map, generate an array then save that to the rules file.
 	$saveme = make_save_array($client_map, $client_map_lookup, "MIDI In");
 	$savestatus = writeToRulesFile(parseAndSave($saveme));
@@ -136,11 +136,12 @@ function make_save_array($client_map, $client_map_lookup, $which = "MIDI Out") {
 			foreach ($portInfo as $portDetail) {
 				if (isset($portDetail["To"]) && $which == "MIDI In") {
 					$index = "To";
-				}
-				else if (isset($portDetail["From"]) && $which == "MIDI Out"){
+				} else if (isset($portDetail["From"]) && $which == "MIDI Out"){
 					$index = "From";
+				} else {
+					continue;
 				}
-				foreach ($portDetail[$index] as $pts){ 
+				foreach ($portDetail[$index] as $pts){
 					// Is weird
 					$from = [$eachDevice['clientName'], $portInfo[0]];
 					$to = $pts;
@@ -275,7 +276,7 @@ function list_devices($client_map, $client_map_lookup, $which = "MIDI Out") {
 <ion-icon name="umbrella-outline"></ion-icon> Connections <ion-icon name="umbrella-outline"></ion-icon></h1>
 <button id="save">Save</button>
 <br/>
-	<?=$savestatus?>
+	<?=$savestatus ?? ''?>
 
 	<div class='container-wrapper'>
 

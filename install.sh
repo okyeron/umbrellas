@@ -39,8 +39,9 @@ wget https://github.com/mzero/midiminder/releases/download/0.70/amidiminder_0.70
 sudo dpkg -i amidiminder_0.70_armhf.deb
 
 sudo cp --remove-destination /home/pi/umbrellas/install/amidiminder.rules  /home/pi/umbrellas/amidiminder.rules
-sudo chown pi:pi /home/pi/umbrellas/amidiminder.rules
+# sudo chown pi:pi /home/pi/umbrellas/amidiminder.rules
 sudo chmod 777 /home/pi/umbrellas/amidiminder.rules
+sudo chown www-data:www-data /home/pi/umbrellas/amidiminder.rules
 sudo cp --remove-destination /home/pi/umbrellas/install/systemd/amidiminder.service /lib/systemd/system/amidiminder.service
 
 sudo raspi-config nonint do_hostname "umbrellas"
